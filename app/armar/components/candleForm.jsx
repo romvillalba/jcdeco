@@ -29,6 +29,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Input } from "@/components/ui/input";
 
 const esencias = [
   { label: "Esencia 1", value: 1 },
@@ -51,8 +52,16 @@ const colores = [
 ];
 
 const FormSchema = z.object({
-  esencia: z.string({
+  esencia: z.number({
     required_error: "Por favor elige una esencia.",
+  }),
+  color: z.string({
+    required_error: "Por favor elige un color.",
+  }),
+  cantidad: z.number({
+    min: 1,
+    max: 10,
+    required_error: "Por favor ingresa una cantidad.",
   }),
 });
 
@@ -62,7 +71,9 @@ export function CandleForm() {
   });
 
   function onSubmit(data /*: z.infer<typeof FormSchema>*/) {
-    console.log(data);
+    console.log(data.esencia); // Esencia seleccionada
+    console.log(data.color); // Color
+    console.log(data.cantidad); // Color
   }
 
   return (
@@ -71,6 +82,7 @@ export function CandleForm() {
         <FormField
           control={form.control}
           name="esencia"
+          id="esencia"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Esencia</FormLabel>
@@ -129,7 +141,7 @@ export function CandleForm() {
         />
         <FormField
           control={form.control}
-          name="type"
+          name="color"
           render={({ field }) => (
             <FormItem className="space-y-2">
               <FormLabel>Elige el color</FormLabel>
@@ -139,11 +151,14 @@ export function CandleForm() {
                   defaultValue={field.value}
                   className="flex w-[300px] flex-wrap justify-between;"
                 >
-                  {colores.map(color => (
-                    <div key={color}>
+                  {colores.map((color, index) => (
+                    <div key={color + index}>
                       <FormItem className="flex flex-row items-center space-x-1 space-y-0 w-[80px]">
                         <FormControl>
-                          <RadioGroupItem value={color.valor} />
+                          <RadioGroupItem
+                            value={color.valor}
+                            style={{ color: color.valor }}
+                          />
                         </FormControl>
                         <FormLabel className="font-normal">
                           {color.nombre}
@@ -153,6 +168,20 @@ export function CandleForm() {
                   ))}
                 </RadioGroup>
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="cantidad"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Cantidad</FormLabel>
+              <FormControl>
+                <Input type="number" {...field} />
+              </FormControl>
+
               <FormMessage />
             </FormItem>
           )}
