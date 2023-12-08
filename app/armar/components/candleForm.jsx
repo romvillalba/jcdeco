@@ -30,6 +30,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 const esencias = [
   { label: "Esencia 1", value: 1 },
@@ -53,9 +54,11 @@ const colores = [
 
 const FormSchema = z.object({
   esencia: z.number({
+    invalid_type_error: "Por favor elige una esencia.",
     required_error: "Por favor elige una esencia.",
   }),
   color: z.string({
+    invalid_type_error: "Por favor elige un color.",
     required_error: "Por favor elige un color.",
   }),
   cantidad: z.coerce
@@ -64,6 +67,7 @@ const FormSchema = z.object({
 });
 
 export function CandleForm() {
+  const { toast } = useToast()
   const searchParams = useSearchParams();
   const form = useForm({ resolver: zodResolver(FormSchema) });
 
@@ -87,22 +91,30 @@ export function CandleForm() {
     const { control, getValues } = form;
     const values = getValues();
     const { esencia, color, cantidad } = values;
-  
+
     if (!esencia || !color || !cantidad) {
-      // Mostrar un mensaje de error
+      toast({
+        title: "Aun no has terminado",
+        description: "Completa el formulario para poder compartir!",
+      })
       return;
     }
-  
+
     const params = new URLSearchParams({
       esencia,
       color,
       cantidad,
     });
-    const link = window.origin + window.location.pathname + "?" + params.toString();
-    console.log(link)
-    navigator.clipboard.writeText(link)
-  };
+    const link =
+      window.origin + window.location.pathname + "?" + params.toString();
+    navigator.clipboard.writeText(link);
+    toast({
+      title: "Vinculo copiado al portapapeles!",
+      description: "Comparte tu vela con tus amigos!",
+    })
   
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
