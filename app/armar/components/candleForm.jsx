@@ -59,7 +59,7 @@ const FormSchema = z.object({
     required_error: "Por favor elige un color.",
   }),
   cantidad: z.coerce
-    .number({invalid_type_error: "Ingresa una cantidad valida",})
+    .number({ invalid_type_error: "Ingresa una cantidad valida" })
     .gte(1, { message: "Ingresa una cantidad valida" }),
 });
 
@@ -171,26 +171,26 @@ export function CandleForm() {
           )}
         />
         <div className="flex justify-between items-end">
-        <FormField
-          control={form.control}
-          name="cantidad"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Cantidad</FormLabel>
-              <FormControl>
-                <Input
-                  className="w-[100px]"
-                  {...field}
-                  type={`number`}
-                  value={field.value||0}
-                />
-              </FormControl>
+          <FormField
+            control={form.control}
+            name="cantidad"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Cantidad</FormLabel>
+                <FormControl>
+                  <Input
+                    className="w-[100px]"
+                    {...field}
+                    type={`number`}
+                    value={field.value || 0}
+                  />
+                </FormControl>
 
-              <FormMessage className="absolute y-4" />
-            </FormItem>
-          )}
-        />
-        <Button type="submit">Crear</Button>
+                <FormMessage className="absolute y-4" />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Crear</Button>
         </div>
       </form>
     </Form>
