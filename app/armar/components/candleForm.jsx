@@ -58,11 +58,9 @@ const FormSchema = z.object({
   color: z.string({
     required_error: "Por favor elige un color.",
   }),
-  cantidad: z.number({
-    min: 1,
-    max: 10,
-    required_error: "Por favor ingresa una cantidad.",
-  }),
+  cantidad: z.coerce
+    .number({invalid_type_error: "Ingresa una cantidad valida",})
+    .gte(1, { message: "Ingresa una cantidad valida" }),
 });
 
 export function CandleForm() {
@@ -149,11 +147,11 @@ export function CandleForm() {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex w-[300px] flex-wrap justify-between;"
+                  className="flex w-[260px] flex-wrap justify-center;"
                 >
                   {colores.map((color, index) => (
                     <div key={color + index}>
-                      <FormItem className="flex flex-row items-center space-x-1 space-y-0 w-[80px]">
+                      <FormItem className="flex flex-row space-x-1 space-y-0 w-[80px]">
                         <FormControl>
                           <RadioGroupItem
                             value={color.valor}
@@ -172,6 +170,7 @@ export function CandleForm() {
             </FormItem>
           )}
         />
+        <div className="flex justify-between items-end">
         <FormField
           control={form.control}
           name="cantidad"
@@ -179,14 +178,20 @@ export function CandleForm() {
             <FormItem>
               <FormLabel>Cantidad</FormLabel>
               <FormControl>
-                <Input type="number" {...field} />
+                <Input
+                  className="w-[100px]"
+                  {...field}
+                  type={`number`}
+                  value={field.value||0}
+                />
               </FormControl>
 
-              <FormMessage />
+              <FormMessage className="absolute y-4" />
             </FormItem>
           )}
         />
         <Button type="submit">Crear</Button>
+        </div>
       </form>
     </Form>
   );
