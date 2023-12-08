@@ -3,7 +3,7 @@ import CandleCard from '@/components/candleCard'
 
 export default function Home() {
   return (
-    <main className="flex justify-center space-x-6 p-24">
+    <main className="flex flex-wrap justify-center items-center py-24 min-h-[600px]">
       <CandleCard/>
       <CandleCard/>
       <CandleCard/>

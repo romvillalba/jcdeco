@@ -1,10 +1,9 @@
 "use client";
-
+import { useSearchParams  } from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,6 +29,7 @@ import {
 } from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
+import { useEffect } from 'react';
 
 const esencias = [
   { label: "Esencia 1", value: 1 },
@@ -43,12 +43,12 @@ const esencias = [
   { label: "Esencia 9", value: 9 },
 ];
 const colores = [
-  { nombre: "Rojo", valor: "#FF0000" },
-  { nombre: "Verde", valor: "#00FF00" },
-  { nombre: "Azul", valor: "#0000FF" },
-  { nombre: "Amarillo", valor: "#FFFF00" },
-  { nombre: "Naranja", valor: "#FFA500" },
-  { nombre: "Morado", valor: "#800080" },
+  { nombre: "Rojo", value: "#FF0000" },
+  { nombre: "Verde", value: "#00FF00" },
+  { nombre: "Azul", value: "#0000FF" },
+  { nombre: "Amarillo", value: "#FFFF00" },
+  { nombre: "Naranja", value: "#FFA500" },
+  { nombre: "Morado", value: "#800080" },
 ];
 
 const FormSchema = z.object({
@@ -64,14 +64,35 @@ const FormSchema = z.object({
 });
 
 export function CandleForm() {
-  const form = useForm({
-    resolver: zodResolver(FormSchema),
-  });
 
-  function onSubmit(data /*: z.infer<typeof FormSchema>*/) {
-    console.log(data.esencia); // Esencia seleccionada
-    console.log(data.color); // Color
-    console.log(data.cantidad); // Color
+  const searchParams = useSearchParams()
+  const form = useForm({resolver: zodResolver(FormSchema),});
+
+  useEffect(() => {
+    const esencia = searchParams.get("esencia");
+    const color = searchParams.get("color");
+    console.log(color);
+    const cantidad = parseInt(searchParams.get("cantidad") || "0");
+    form.setValue("esencia",parseInt(esencia));
+    form.setValue("color",  color);
+    form.setValue("cantidad", parseInt(cantidad));
+   
+  }, [searchParams,form]);
+
+
+  function onSubmit({esencia,color,cantidad} /*: z.infer<typeof FormSchema>*/) {
+   
+    console.log(esencia); // Esencia seleccionada
+    console.log(color); // Color
+    console.log(cantidad); // Color
+    
+    const params = new URLSearchParams({
+      esencia: esencia,
+      color: color,
+      cantidad: cantidad,
+    });
+    
+    console.log( window.origin +window.location.pathname+"?"+ params.toString() );
   }
 
   return (
@@ -151,11 +172,12 @@ export function CandleForm() {
                 >
                   {colores.map((color, index) => (
                     <div key={color + index}>
-                      <FormItem className="flex flex-row space-x-1 space-y-0 w-[80px]">
+                      <FormItem className="flex flex-row space-x-1 space-y-0 my-2 w-[80px]">
                         <FormControl>
                           <RadioGroupItem
-                            value={color.valor}
-                            style={{ color: color.valor }}
+                            value={color.value}
+                            style={{ color: color.value }}
+                            checked={field.value === color.value}
                           />
                         </FormControl>
                         <FormLabel className="font-normal">

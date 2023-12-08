@@ -1,4 +1,4 @@
-const { CandleForm } = require("./components/candleForm")
+const { CandleForm } = require("../components/candleForm")
 
 
 const page = () => {
