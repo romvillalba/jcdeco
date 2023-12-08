@@ -91,7 +91,7 @@ export function CandleForm() {
                       variant="outline"
                       role="combobox"
                       className={cn(
-                        "w-[200px] justify-between",
+                        "w-[260px] justify-between",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -104,7 +104,7 @@ export function CandleForm() {
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0">
+                <PopoverContent className="w-[260px] p-0">
                   <Command>
                     <CommandInput placeholder="Buscar esencia..." />
                     <CommandEmpty>Esencia no encontrada.</CommandEmpty>
@@ -147,7 +147,7 @@ export function CandleForm() {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex w-[260px] flex-wrap justify-center;"
+                  className="flex w-[260px] flex-wrap justify-center"
                 >
                   {colores.map((color, index) => (
                     <div key={color + index}>
