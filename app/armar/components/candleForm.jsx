@@ -1,7 +1,7 @@
 "use client";
-import { useSearchParams  } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, Share2, ShareIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 const esencias = [
   { label: "Esencia 1", value: 1 },
@@ -64,37 +64,45 @@ const FormSchema = z.object({
 });
 
 export function CandleForm() {
-
-  const searchParams = useSearchParams()
-  const form = useForm({resolver: zodResolver(FormSchema),});
+  const searchParams = useSearchParams();
+  const form = useForm({ resolver: zodResolver(FormSchema) });
 
   useEffect(() => {
     const esencia = searchParams.get("esencia");
     const color = searchParams.get("color");
-    console.log(color);
     const cantidad = parseInt(searchParams.get("cantidad") || "0");
-    form.setValue("esencia",parseInt(esencia));
-    form.setValue("color",  color);
+    form.setValue("esencia", parseInt(esencia));
+    form.setValue("color", color);
     form.setValue("cantidad", parseInt(cantidad));
-   
-  }, [searchParams,form]);
+  }, [searchParams, form]);
 
-
-  function onSubmit({esencia,color,cantidad} /*: z.infer<typeof FormSchema>*/) {
-   
+  function onSubmit(
+    { esencia, color, cantidad } /*: z.infer<typeof FormSchema>*/
+  ) {
     console.log(esencia); // Esencia seleccionada
     console.log(color); // Color
     console.log(cantidad); // Color
-    
-    const params = new URLSearchParams({
-      esencia: esencia,
-      color: color,
-      cantidad: cantidad,
-    });
-    
-    console.log( window.origin +window.location.pathname+"?"+ params.toString() );
   }
-
+  const share = () => {
+    const { control, getValues } = form;
+    const values = getValues();
+    const { esencia, color, cantidad } = values;
+  
+    if (!esencia || !color || !cantidad) {
+      // Mostrar un mensaje de error
+      return;
+    }
+  
+    const params = new URLSearchParams({
+      esencia,
+      color,
+      cantidad,
+    });
+    const link = window.origin + window.location.pathname + "?" + params.toString();
+    console.log(link)
+    navigator.clipboard.writeText(link)
+  };
+  
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -212,8 +220,14 @@ export function CandleForm() {
               </FormItem>
             )}
           />
-          <Button type="submit">Crear</Button>
+          <Button type="button" onClick={() => share()}>
+            <Share2 />
+            Compartir
+          </Button>
         </div>
+        <Button className="translate-y-6 w-[260px]" type="submit">
+          Armar Pedido
+        </Button>
       </form>
     </Form>
   );
