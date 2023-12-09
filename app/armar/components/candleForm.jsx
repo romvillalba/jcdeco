@@ -58,21 +58,7 @@ const envases = [
   { nombre: "Envase 3", value: 3, imageUrl: "/img/candle_1.webp" },
   { nombre: "Envase 4", value: 4, imageUrl: "/img/candle_1.webp" },
 ];
-const images = [
-  {
-    src: "/img/candle_2.webp",
-    alt: "Vela 1",
-  },
-  {
-    src: "/img/candle_3.webp",
-    alt: "Vela 2",
-  },
-  // ...
-  {
-    src: "/img/candle_4.webp",
-    alt: "Vela n",
-  },
-];
+
 const FormSchema = z.object({
   esencia: z.number({
     invalid_type_error: "Por favor elige una esencia.",
@@ -138,13 +124,7 @@ export function CandleForm() {
 
   return (
     <div className="lg:flex lg:justify-center gap-16 space-y-2 items-center">
-     <Image
-              src={images[0].src}
-              alt={images[0].alt}
-              width={260}
-              height={300}
-              className=" object-cover rounded-lg"
-            />
+    
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
@@ -289,7 +269,7 @@ export function CandleForm() {
                     className="w-[100px]"
                     {...field}
                     type={`number`}
-                    value={field.value || 0}
+                    value={field.value || ""}
                   />
                 </FormControl>
 
