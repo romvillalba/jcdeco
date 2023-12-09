@@ -11,7 +11,6 @@ const Carousel = ({images}) => {
       pagination={{ type: "bullets" }}
       loop={true}
       modules={[Autoplay, Navigation, Pagination]}
-      onSwiper={swiper => console.log(swiper)}
       autoplay={{
         delay: 2500,
         disableOnInteraction: false,
