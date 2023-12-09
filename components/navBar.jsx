@@ -13,7 +13,7 @@ const NavBar = () => {
         <Link href="/">SHOP</Link>
       </Button>
       <Button asChild variant="ghost">
-        <Link href="/">Contacto</Link>
+        <Link href="/contacto">Contacto</Link>
       </Button>
       <ModeToggle />
     </nav>
