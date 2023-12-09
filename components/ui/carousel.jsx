@@ -8,7 +8,7 @@ const Carousel = ({images}) => {
   return (
     <Swiper
       navigation
-      pagination={{ type: "fraction" }}
+      pagination={{ type: "bullets" }}
       loop={true}
       modules={[Autoplay, Navigation, Pagination]}
       onSwiper={swiper => console.log(swiper)}
