@@ -51,6 +51,12 @@ const colores = [
   { nombre: "Naranja", value: "#FFA500" },
   { nombre: "Morado", value: "#800080" },
 ];
+const envases = [
+  { nombre: "Envase 1", value: 1, imageUrl: "/img/candle_1.webp"},
+  { nombre: "Envase 2", value: 2, imageUrl: "/img/candle_1.webp" },
+  { nombre: "Envase 3", value: 3, imageUrl: "/img/candle_1.webp" },
+  { nombre: "Envase 4", value: 4, imageUrl: "/img/candle_1.webp" },
+];
 
 const FormSchema = z.object({
   esencia: z.number({
@@ -204,6 +210,42 @@ export function CandleForm() {
                           {color.nombre}
                         </FormLabel>
                       </FormItem>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="envase"
+          render={({ field }) => (
+            <FormItem className="space-y-2">
+              <FormLabel>Elige el envase</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex w-[260px] flex-wrap justify-center"
+                >
+                  {envases.map((envase, index) => (
+                    <div key={envase + index} className="flex items-center my-2">
+                      <FormControl>
+                        <RadioGroupItem
+                          value={envase.value}
+                          checked={field.value === envase.value}
+                        />
+                      </FormControl>
+                      <img
+                        src={envase.imageUrl}
+                        alt={`Envase ${envase.value}`}
+                        className="w-8 h-8 ml-2"
+                      />
+                      <FormLabel className="font-normal ml-2">
+                        {envase.nombre}
+                      </FormLabel>
                     </div>
                   ))}
                 </RadioGroup>
