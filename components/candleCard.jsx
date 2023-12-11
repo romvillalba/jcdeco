@@ -25,7 +25,7 @@ const CandleCard = ({ id }) => {
   ];
 
   return (
-    <div className="flex-col text-center items-center justify-center px-16 py-2">
+    <div className="flex-col text-center items-center justify-center rounded-lg p-2 border-solid border-2 border-orange-500 " >
       <div className="relative h-[280px] w-[260px]">
       <Carousel images={images}/>
       
