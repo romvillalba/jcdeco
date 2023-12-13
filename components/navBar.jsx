@@ -1,13 +1,15 @@
 import Link from "next/link";
-import React from "react";
+
 import { ModeToggle } from "./ui/theme-toggle";
 import { Button } from "./ui/button";
+import Cart from "./ui/cart";
+
 
 const NavBar = () => {
   return (
-    <nav className="flex items-center justify-center lg:justify-evenly">
+    <nav className="flex items-center justify-around lg:justify-evenly">
       <Button asChild variant="ghost">
-        <Link href="/">Acerca de Nosotros</Link>
+        <Link href="/">Nosotros</Link>
       </Button>
       <Button asChild variant="ghost">
         <Link href="/">SHOP</Link>
@@ -15,7 +17,9 @@ const NavBar = () => {
       <Button asChild variant="ghost">
         <Link href="/contacto">Contacto</Link>
       </Button>
+      <Cart/>
       <ModeToggle />
+     
     </nav>
   );
 };

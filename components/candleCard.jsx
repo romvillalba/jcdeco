@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { Button } from "./ui/button";
 
@@ -25,10 +24,9 @@ const CandleCard = ({ id }) => {
   ];
 
   return (
-    <div className="flex-col text-center items-center justify-center rounded-lg p-2 border-solid border-2 border-orange-500 " >
+    <div className="flex-col text-center items-center justify-center rounded-lg p-2 border-solid border-2 border-orange-500 ">
       <div className="relative h-[280px] w-[260px]">
-      <Carousel images={images}/>
-      
+        <Carousel images={images} />
       </div>
 
       <h2>Texto de la Vela</h2>
