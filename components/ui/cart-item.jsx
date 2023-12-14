@@ -12,10 +12,10 @@ import { Button } from "./button";
 
 const CartItem = () => {
   return (
-    <Card>
+    <Card className="w-[100%] text-s">
       <CardHeader>
         <CardTitle>Nombre Item</CardTitle>
-        <CardDescription>Descripción</CardDescription>
+        <CardDescription>Esencia</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex justify-around items-center">
@@ -26,13 +26,14 @@ const CartItem = () => {
             height={110}
             className="object-cover rounded-lg"
           />
-          <div>
-            <ul>
-              <li>Esencia : Esencia 1</li>
-              <li>Color : Rojo</li>
-              <li>Cantidad : 5 </li>
-              <li><Button variant="destructive" size={`sm`}><Trash2Icon /> Quitar </Button></li>
-            </ul>
+          <div className="flex flex-col ">
+            <p>Color : Rojo</p>
+            <p>Cantidad : 5 </p>
+            <p>
+              <Button variant="destructive" size={`sm`}>
+                <Trash2Icon /> Quitar{" "}
+              </Button>
+            </p>
           </div>
         </div>
       </CardContent>
