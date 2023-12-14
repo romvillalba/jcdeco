@@ -1,4 +1,12 @@
 import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "./ui/button";
 
 import "swiper/css";
@@ -24,16 +32,30 @@ const CandleCard = ({ id }) => {
   ];
 
   return (
-    <div className="flex-col text-center items-center justify-center rounded-lg p-2 border-solid border-2 border-orange-500 ">
-      <div className="relative h-[280px] w-[260px]">
+    <Card className="text-center px-0 space-x-0 border-orange-500 " >
+      <CardHeader>
+        <CardTitle>Card Title</CardTitle>
+        <CardDescription>Card Description</CardDescription>
+      </CardHeader>
+      <CardContent className="relative h-[280px] w-[260px]">
         <Carousel images={images} />
-      </div>
+      </CardContent>
+      <CardFooter>
+        <Button asChild size="lg" className='w-full'>
+          <Link href={`/armar/envase=${id}`}>Personalizar</Link>
+        </Button>
+      </CardFooter>
+    </Card>
+    // <div className="flex-col text-center items-center justify-center rounded-lg p-2 border-solid border-2 border-orange-500 ">
+    //   <div className="relative h-[280px] w-[260px]">
+    //     <Carousel images={images} />
+    //   </div>
 
-      <h2>Texto de la Vela</h2>
-      <Button asChild size="lg">
-        <Link href={`/armar/envase=${id}`}>Personalizar</Link>
-      </Button>
-    </div>
+    //   <h2>Texto de la Vela</h2>
+    //   <Button asChild size="lg">
+    //     <Link href={`/armar/envase=${id}`}>Personalizar</Link>
+    //   </Button>
+    // </div>
   );
 };
 
