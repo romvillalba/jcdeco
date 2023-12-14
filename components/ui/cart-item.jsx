@@ -9,16 +9,17 @@ import {
 import { Trash2Icon } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./button";
+import { Separator } from "./separator";
 
 const CartItem = () => {
   return (
-    <Card className="w-[100%] text-s">
+    <Card className="w-[100%] text-s border-none py-0 my-0">
       <CardHeader>
         <CardTitle>Nombre Item</CardTitle>
         <CardDescription>Esencia</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex justify-around items-center">
+        <div className="flex justify-start space-x-10 items-center">
           <Image
             src={"/img/candle_2.webp"}
             alt={"alt"}
@@ -37,7 +38,9 @@ const CartItem = () => {
           </div>
         </div>
       </CardContent>
-      <CardFooter></CardFooter>
+      <CardFooter>
+        <Separator/>
+      </CardFooter>
     </Card>
   );
 };

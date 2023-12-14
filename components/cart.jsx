@@ -18,12 +18,12 @@ const Cart = () => {
       <SheetTrigger>
         <span className="flex">
           <ShoppingCartIcon />
-          (0)
+          (5)
         </span>
       </SheetTrigger>
       <SheetContent  className="w-full">
         <SheetHeader>
-          <SheetTitle>Carrito</SheetTitle>
+          <SheetTitle>{`Carrito (5)`}</SheetTitle>
           <ScrollArea className="h-screen w-full pb-40">
             <CartItem/>
             <CartItem/>
@@ -35,7 +35,7 @@ const Cart = () => {
             <CartItem/>
             <CartItem/>
             <CartItem/>
-        <Button className="w-[100%] absolute left-0 bottom-20">Comprar Carrito</Button>
+        <Button className="w-[95%] absolute left-0 bottom-20">Comprar Carrito</Button>
           </ScrollArea>
         </SheetHeader>
       </SheetContent>
