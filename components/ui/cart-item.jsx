@@ -38,9 +38,9 @@ const CartItem = () => {
           </div>
         </div>
       </CardContent>
-      <CardFooter>
         <Separator/>
-      </CardFooter>
+      {/* <CardFooter>
+      </CardFooter> */}
     </Card>
   );
 };
