@@ -35,7 +35,7 @@ const Cart = () => {
             <CartItem/>
             <CartItem/>
             <CartItem/>
-        <Button className="w-[85%] fixed bottom-5">Comprar Carrito</Button>
+        <Button className="w-[95%] sticky bottom-0">Comprar Carrito</Button>
           </ScrollArea>
         </SheetHeader>
       </SheetContent>
