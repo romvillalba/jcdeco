@@ -21,21 +21,31 @@ const Cart = () => {
           (5)
         </span>
       </SheetTrigger>
-      <SheetContent  className="w-full">
+      <SheetContent className="w-full">
         <SheetHeader>
           <SheetTitle>{`Carrito (5)`}</SheetTitle>
-          <ScrollArea className="h-screen w-full pb-40">
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
-            <CartItem/>
-        <Button className="w-[95%] sticky bottom-0">Comprar Carrito</Button>
+          <ScrollArea
+            className="pb-24 w-full"
+            style={{
+              height: "100svh",
+            }}
+          >
+            <CartItem />
+            <CartItem />
+            <CartItem />
+            <CartItem />
+            <CartItem />
+            <CartItem />
+            <CartItem />
+            <CartItem />
+            <CartItem />
+           
+           
+            
+
+            <Button className="w-[95%] sticky bottom-0 mt-10">
+              Comprar Carrito
+            </Button>
           </ScrollArea>
         </SheetHeader>
       </SheetContent>

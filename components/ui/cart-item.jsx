@@ -13,21 +13,21 @@ import { Separator } from "./separator";
 
 const CartItem = () => {
   return (
-    <Card className="w-[100%] text-s border-none py-0 my-0">
+    <Card className="w-[100%] border-none">
       <CardHeader>
         <CardTitle>Nombre Item</CardTitle>
         <CardDescription>Esencia</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="flex justify-start space-x-10 items-center">
+        <div className="flex items-center gap-x-4">
           <Image
             src={"/img/candle_2.webp"}
             alt={"alt"}
             width={110}
             height={110}
-            className="object-cover rounded-lg"
+            className="object-cover rounded-lg "
           />
-          <div className="flex flex-col ">
+          <div className="flex flex-col gap-2 mx-auto">
             <p>Color : Rojo</p>
             <p>Cantidad : 5 </p>
             <p>
@@ -38,7 +38,7 @@ const CartItem = () => {
           </div>
         </div>
       </CardContent>
-        <Separator/>
+      <Separator />
       {/* <CardFooter>
       </CardFooter> */}
     </Card>
