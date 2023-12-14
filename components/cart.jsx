@@ -21,7 +21,7 @@ const Cart = () => {
           (5)
         </span>
       </SheetTrigger>
-      <SheetContent className="w-full">
+      <SheetContent className="w-full p-4">
         <SheetHeader>
           <SheetTitle>{`Carrito (5)`}</SheetTitle>
           <ScrollArea
@@ -43,7 +43,7 @@ const Cart = () => {
            
             
 
-            <Button className="w-[95%] sticky bottom-0 mt-10">
+            <Button className="w-[95%] sticky bottom-0 ml-2 mt-10">
               Comprar Carrito
             </Button>
           </ScrollArea>
