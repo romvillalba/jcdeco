@@ -21,7 +21,7 @@ const Cart = () => {
           (0)
         </span>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent  className="w-full">
         <SheetHeader>
           <SheetTitle>Carrito</SheetTitle>
           <ScrollArea className="h-screen w-full pb-40">
