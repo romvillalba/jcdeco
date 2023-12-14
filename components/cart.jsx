@@ -7,7 +7,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { ShoppingCartIcon } from "lucide-react";
+import CartItem from "./ui/cart-item";
 const Cart = () => {
   return (
     <Sheet>
@@ -20,7 +23,18 @@ const Cart = () => {
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Carrito</SheetTitle>
-          <SheetDescription>No hay items en el carrito</SheetDescription>
+          <ScrollArea className="h-screen w-full pb-24">
+            <CartItem/>
+            <CartItem/>
+            <CartItem/>
+            <CartItem/>
+            <CartItem/>
+            <CartItem/>
+            <CartItem/>
+            <CartItem/>
+            <CartItem/>
+            <CartItem/>
+          </ScrollArea>
         </SheetHeader>
       </SheetContent>
     </Sheet>

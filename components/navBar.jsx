@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { ModeToggle } from "./ui/theme-toggle";
 import { Button } from "./ui/button";
-import Cart from "./ui/cart";
+import Cart from "./cart";
 
 
 const NavBar = () => {
