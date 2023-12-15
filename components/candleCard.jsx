@@ -19,7 +19,7 @@ const CandleCard = ({ id,name,description,images }) => {
 
 
   return (
-    <Card className="text-center px-0 space-x-0 border-orange-500 w-[260px]" >
+    <Card className="text-center px-0 space-x-0 border-orange-500 w-[200px]" >
       <CardHeader>
         <CardTitle className={"text-sm"}>{name}</CardTitle>
         <CardDescription className={"whitespace-pre-line text-xs h-12"}>{description}</CardDescription>
@@ -28,7 +28,7 @@ const CandleCard = ({ id,name,description,images }) => {
         <Carousel images={images} />
       </CardContent>
       <CardFooter>
-        <Button asChild size="lg" className='w-full'>
+        <Button asChild size="sm" className='w-full'>
           <Link href={`/armar/envase=${id}`}>Personalizar</Link>
         </Button>
       </CardFooter>
