@@ -21,7 +21,7 @@ const CandleCard = ({ id,name,description,images }) => {
   return (
     <Card className="text-center border-orange-500 w-[200px]" >
       <CardHeader>
-        <CardTitle className={"text-sm"}>{name}</CardTitle>
+        <CardTitle className={"text-sm h-8"}>{name}</CardTitle>
         <CardDescription className={"whitespace-pre-line text-xs h-12"}>{description}</CardDescription>
       </CardHeader>
       <CardContent className="relative ">
