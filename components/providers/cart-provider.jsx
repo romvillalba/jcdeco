@@ -11,7 +11,7 @@ export default function CartProvider({ children }) {
     if (!cartItems.length && !avoidReading) {
       const jsonItems = localStorage.getItem("cart");
       const localItems = JSON.parse(jsonItems);
-      setCartItems(localItems);
+     if(localItems) setCartItems(localItems);
       setAvoidReading(true);
     }
     if (avoidReading) localStorage.setItem("cart", JSON.stringify(cartItems));
