@@ -4,6 +4,7 @@ import NavBar from '@/components/navBar'
 import Footer from '@/components/footer'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
+import  CartProvider  from '@/components/providers/cart-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,10 +24,12 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
+          <CartProvider>
           <NavBar />
           {children}
           <Footer />
           <Toaster />
+          </CartProvider>
         </ThemeProvider>
       </body>
     </html>

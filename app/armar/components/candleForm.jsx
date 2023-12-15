@@ -1,10 +1,12 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+
+import { useContext, useEffect,useState} from "react";
+import { useForm } from "react-hook-form";
+import { useSearchParams,useRouter, useParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, ChevronsUpDown, Share2 } from "lucide-react";
-import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { CartContext } from "@/components/providers/cart-provider";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,10 +30,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -42,6 +40,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 
 const esencias = [
   { label: "Esencia 1", value: 1 },
@@ -78,13 +79,14 @@ const FormSchema = z.object({
 });
 
 export function CandleForm() {
+  const {cartItems , setCartItems } = useContext(CartContext);
   const router = useRouter();
   const searchParams = useSearchParams();
-
+  const params = useParams()
   const { toast } = useToast();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [pedido, setPedido] = useState("");
+
 
   const form = useForm({ resolver: zodResolver(FormSchema) });
 
@@ -97,26 +99,13 @@ export function CandleForm() {
     form.setValue("cantidad", parseInt(cantidad));
   }, [searchParams, form]);
 
-  function onSubmit(
-    { esencia, color, cantidad } /*: z.infer<typeof FormSchema>*/
-  ) {
-    const mensaje = encodeURIComponent(
-      `esencia=${esencia} color=${color} cantidad=${cantidad}`
-    );
-    setIsOpen(true);
-    setPedido(mensaje);
+  function onSubmit({ esencia, color, cantidad }) {
+    const envase = params.envase;
+    setCartItems([...cartItems,{envase,esencia,color,cantidad}])
+    setIsOpen(true)
   }
-  const handleConfirmWhatsApp = () => {
-    router.push(
-      `https://api.whatsapp.com/send?phone=+xxxxxxxxxx&text=${pedido}`
-    );
 
-    setIsOpen(false);
-  };
-  const handleConfirmInstagram = () => {
-    router.push(`https://ig.me/xxxxxxxx`);
-    setIsOpen(false);
-  };
+ 
   const share = () => {
     const { control, getValues } = form;
     const values = getValues();
@@ -130,13 +119,13 @@ export function CandleForm() {
       return;
     }
 
-    const params = new URLSearchParams({
+    const shareParams = new URLSearchParams({
       esencia,
       color,
       cantidad,
     });
     const link =
-      window.origin + window.location.pathname + "?" + params.toString();
+      window.origin + window.location.pathname + "?" + shareParams.toString();
     navigator.clipboard.writeText(link);
     toast({
       title: "Vinculo copiado al portapapeles!",
@@ -275,7 +264,7 @@ export function CandleForm() {
             </Button>
           </div>
           <Button className="translate-y-6 w-[260px]" type="submit">
-            Armar Pedido
+            Agregar al Carrito
           </Button>
         </form>
       </Form>
@@ -284,19 +273,19 @@ export function CandleForm() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Nuestros pedidos se realizan mediante redes sociales
+              Producto agregado al carrito
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Puedes elegir contactarnos por Whatsapp o Instagram
+              Puedes finalizar tu pedido o continuar comprando
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction
               onClick={() => {
-                handleConfirmWhatsApp();
+                setIsOpen(false);
               }}
             >
-              Whatsapp
+              Finalizar Compra
             </AlertDialogAction>
             {/* <AlertDialogAction
               onClick={() => {
@@ -310,7 +299,7 @@ export function CandleForm() {
                 setIsOpen(false);
               }}
             >
-              Cancelar
+              Seguir Comprando
             </AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
