@@ -39,11 +39,7 @@ const Cart = () => {
             <CartItem />
             <CartItem />
             <CartItem />
-           
-           
-            
-
-            <Button className="w-[95%] sticky bottom-0 ml-2 mt-10">
+            <Button className="w-[90%] sticky bottom-0 ml-4 mt-14">
               Comprar Carrito
             </Button>
           </ScrollArea>

@@ -107,8 +107,10 @@ export function CandleForm() {
     setPedido(mensaje);
   }
   const handleConfirmWhatsApp = () => {
-   router.push(`https://api.whatsapp.com/send?phone=+xxxxxxxxxx&text=${pedido}`);
-    
+    router.push(
+      `https://api.whatsapp.com/send?phone=+xxxxxxxxxx&text=${pedido}`
+    );
+
     setIsOpen(false);
   };
   const handleConfirmInstagram = () => {
@@ -226,7 +228,12 @@ export function CandleForm() {
                           <FormControl>
                             <RadioGroupItem
                               value={color.value}
-                              style={{ color: color.value }}
+                              style={{
+                                background:
+                                  field.value === color.value && color.value,
+                                color:
+                                  field.value === color.value && color.value,
+                              }}
                               checked={field.value === color.value}
                             />
                           </FormControl>
