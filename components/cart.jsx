@@ -2,6 +2,7 @@
 import React, { useContext } from "react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -15,16 +16,14 @@ import CartItem from "./ui/cart-item";
 import { Button } from "./ui/button";
 import { CartContext } from "./providers/cart-provider";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 
 const Cart = () => {
   const { cartItems, removeItem } = useContext(CartContext);
-  const router= useRouter()
-  
-
+  const router = useRouter();
 
   return (
-    <Sheet >
+    <Sheet>
       <SheetTrigger>
         <span className="flex">
           <ShoppingCartIcon />({cartItems.length})
@@ -49,20 +48,25 @@ const Cart = () => {
                     removeItem={removeItem}
                   />
                 ))}
-
-                <Button className="w-[90%] sticky bottom-0 ml-4 mt-14">
-                  Comprar Carrito
-                </Button>
+                <SheetClose asChild>
+                  <Button className="w-[90%] sticky bottom-0 ml-4 mt-14">
+                    Comprar Carrito
+                  </Button>
+                </SheetClose>
               </ScrollArea>
             </>
           ) : (
             <>
               <SheetTitle>No tienes items en el carrito</SheetTitle>
-              
-                <SheetDescription className="pt-14">
-                  Agrega items al carrito para continuar con una compra
-                </SheetDescription>
-             
+
+              <SheetDescription className="py-14">
+                Agrega items al carrito para continuar con una compra
+              </SheetDescription>
+              <SheetClose asChild className=" ml-4">
+                  <Button asChild className="w-[90%]">
+                    <Link href='/armar'>Ir a la tienda</Link>
+                  </Button>
+              </SheetClose>
             </>
           )}
         </SheetHeader>
