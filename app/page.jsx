@@ -87,7 +87,7 @@ async function getData() {
 export default async function Home() {
   const data = await getData();
   return (
-    <main className="flex flex-wrap justify-center items-center px-12 py-24 gap-6 lg:gap-20 min-h-[600px]">
+    <main className="flex flex-wrap justify-center items-center px-6 py-24 gap-6 lg:gap-20 min-h-[600px]">
       {data.map(frasco => (
         <CandleCard id={frasco.id} name={frasco.name}description={frasco.description}images={frasco.images} key={frasco.id} />
       ))}
