@@ -15,12 +15,11 @@ import { ShoppingCartIcon } from "lucide-react";
 import CartItem from "./ui/cart-item";
 import { Button } from "./ui/button";
 import { CartContext } from "./providers/cart-provider";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const Cart = () => {
   const { cartItems, removeItem } = useContext(CartContext);
-  const router = useRouter();
+
 
   return (
     <Sheet>
