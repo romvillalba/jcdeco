@@ -14,40 +14,57 @@ import { ShoppingCartIcon } from "lucide-react";
 import CartItem from "./ui/cart-item";
 import { Button } from "./ui/button";
 import { CartContext } from "./providers/cart-provider";
+import { useRouter } from "next/navigation";
+
 
 const Cart = () => {
-  const {cartItems} =  useContext(CartContext);
+  const { cartItems, removeItem } = useContext(CartContext);
+  const router= useRouter()
   
+
+
   return (
-    <Sheet>
+    <Sheet >
       <SheetTrigger>
         <span className="flex">
-          <ShoppingCartIcon />
-          ({cartItems.length})
+          <ShoppingCartIcon />({cartItems.length})
         </span>
       </SheetTrigger>
-      <SheetContent className="w-full p-4">
+      <SheetContent className="w-[350px]  p-4">
         <SheetHeader>
-          <SheetTitle>{`Carrito (${cartItems.length})`}</SheetTitle>
-          <ScrollArea
-            className="pb-24 w-full"
-            style={{
-              height: "100svh",
-            }}
-          >
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <Button className="w-[90%] sticky bottom-0 ml-4 mt-14">
-              Comprar Carrito
-            </Button>
-          </ScrollArea>
+          {cartItems.length > 0 ? (
+            <>
+              <SheetTitle>{`Carrito (${cartItems.length})`}</SheetTitle>
+              <ScrollArea
+                className="pb-24 w-full text-sm"
+                style={{
+                  height: "100svh",
+                }}
+              >
+                {cartItems.map((cartItem, index) => (
+                  <CartItem
+                    key={cartItem + index}
+                    cartItem={cartItem}
+                    index={index}
+                    removeItem={removeItem}
+                  />
+                ))}
+
+                <Button className="w-[90%] sticky bottom-0 ml-4 mt-14">
+                  Comprar Carrito
+                </Button>
+              </ScrollArea>
+            </>
+          ) : (
+            <>
+              <SheetTitle>No tienes items en el carrito</SheetTitle>
+              
+                <SheetDescription className="pt-14">
+                  Agrega items al carrito para continuar con una compra
+                </SheetDescription>
+             
+            </>
+          )}
         </SheetHeader>
       </SheetContent>
     </Sheet>

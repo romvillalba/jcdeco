@@ -10,12 +10,14 @@ import Image from "next/image";
 import { Button } from "./button";
 import { Separator } from "./separator";
 
-const CartItem = () => {
+const CartItem = ({cartItem,index,removeItem}) => {
+  console.log(cartItem);
   return (
+
     <Card className="w-[100%] border-none">
       <CardHeader>
-        <CardTitle>Nombre Item</CardTitle>
-        <CardDescription>Esencia</CardDescription>
+        <CardTitle>{cartItem.envase}</CardTitle>
+        <CardDescription>{cartItem.esencia}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex items-center gap-x-4">
@@ -27,10 +29,10 @@ const CartItem = () => {
             className="object-cover rounded-lg "
           />
           <div className="flex flex-col gap-2 mx-auto">
-            <p>Color : Rojo</p>
-            <p>Cantidad : 5 </p>
+            <p>Color :  {cartItem.color}</p>
+            <p>Cantidad : {cartItem.cantidad} </p>
             <p>
-              <Button variant="destructive" size={`sm`}>
+              <Button variant="destructive" size={`sm`} onClick={()=>{removeItem(index)}}>
                 <Trash2Icon /> Quitar{" "}
               </Button>
             </p>
@@ -38,8 +40,6 @@ const CartItem = () => {
         </div>
       </CardContent>
       <Separator />
-      {/* <CardFooter>
-      </CardFooter> */}
     </Card>
   );
 };
